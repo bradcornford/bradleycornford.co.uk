@@ -22,6 +22,7 @@ $(document).ready(function()
         if ($.inArray($(this).attr("id"), requiredFields) >= 0) {
             if (($(this).val() == '') || ($(this).val() == emptyerror)) {
                 $(this).parent().addClass("error");
+                errorNotice.addClass('error');
                 errorNotice.append(ucwords($(this).attr("id")) + emptyerror);
                 errorNotice.fadeIn(750);
             } else {
@@ -29,6 +30,7 @@ $(document).ready(function()
                     if ($(this).attr("id") == "email") {
                         if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(this).val())) {
                             $(this).parent().addClass("error");
+                            errorNotice.addClass('error');
                             errorNotice.append(emailerror);
                             errorNotice.fadeIn(750);
                         }
@@ -37,6 +39,7 @@ $(document).ready(function()
                     if ($(this).attr("id") == "dob" || $(this).attr("id") == "date") {
                         if (!$(this).val().match(/^\d\d?\/\d\d?\/\d\d\d\d$/)) {
                             $(this).parent().addClass("error");
+                            errorNotice.addClass('error');
                             errorNotice.append(ucwords($(this).attr("id")) + dateerror);
                             errorNotice.fadeIn(750);
                         }
@@ -45,6 +48,7 @@ $(document).ready(function()
                     if ($(this).attr("id") == "phone") {
                         if (!/^0\d{2,4}[ -][\d -]{6,9}$/.test($(this).val())) {
                             $(this).parent().addClass("error");
+                            errorNotice.addClass('error');
                             errorNotice.append(ucwords($(this).attr("id")) + phoneerror);
                             errorNotice.fadeIn(750);
                         }
@@ -53,6 +57,7 @@ $(document).ready(function()
                     if ($(this).attr("id") == "postcode") {
                         if (!$(this).val().match(/^([1-9]\d{3}\s[A-Z]{2})$/)) {
                             $(this).parent().addClass("error");
+                            errorNotice.addClass('error');
                             errorNotice.append(ucwords($(this).attr("id")) + posterror);
                             errorNotice.fadeIn(750);
                         }
@@ -61,28 +66,33 @@ $(document).ready(function()
                     if ($(this).attr("id") == "password") {
                         if ($(this).val().length <= 7) {
                             $(this).parent().addClass("error");
+                            errorNotice.addClass('error');
                             errorNotice.append(passworderror);
                             errorNotice.fadeIn(750);
                         } else {
                             if (!$(this).val().match(/(.*[0-9])/)) {
                                 $(this).parent().addClass("error");
+                                errorNotice.addClass('error');
                                 errorNotice.append(passwordverror);
                                 errorNotice.fadeIn(750);
                             } else {
                                 if (!$(this).val().match(/([a-zA-Z])/)) {
                                     $(this).parent().addClass("error");
+                                    errorNotice.addClass('error');
                                     errorNotice.append(passwordaerror);
                                     errorNotice.fadeIn(750);
                                 } else {
                                     if ($("#passwordcheck").val() != '' && $(this).val() != $("#passwordcheck").val()) {
                                         $(this).parent().addClass("error");
                                         $("#passwordcheck").parent().addClass("error");
+                                        errorNotice.addClass('error');
                                         errorNotice.append(passwordcerror);
                                         errorNotice.fadeIn(750);
                                     } else {
                                         if ($.inArray($(this).attr("id"), "username") >= 0 && $(this).val() == $("#username").val()) {
                                             $(this).parent().addClass("error");
                                             $("#username").parent().addClass("error");
+                                            errorNotice.addClass('error');
                                             errorNotice.append(passworduerror);
                                             errorNotice.fadeIn(750);
                                         }
@@ -96,6 +106,7 @@ $(document).ready(function()
                         if ($(this).val() != $("#password").val()) {
                             $(this).parent().addClass("error");
                             $("#password").parent().addClass("error");
+                            errorNotice.addClass('error');
                             errorNotice.append(passwordcerror);
                             errorNotice.fadeIn(750);
                         }
@@ -106,6 +117,7 @@ $(document).ready(function()
                     }
                 } else {
                     $(this).parent().addClass("error");
+                    errorNotice.addClass('error');
                     errorNotice.append(ucwords($(this).attr("id")) + lengtherror);
                     errorNotice.fadeIn(750);
                 }
@@ -117,6 +129,7 @@ $(document).ready(function()
                 $(this).parent().parent().addClass("error");
                 $(this).parent().removeClass("error");
                 $(this).parent().removeClass("success");
+                errorNotice.addClass('error');
                 errorNotice.append(ucwords($(this).attr("id")) + checkerror);
                 errorNotice.fadeIn(750);
             }
@@ -147,6 +160,7 @@ $(document).ready(function()
 
             if (isSelected != empty && isSelected != '') {
                 $(this).parent().parent().addClass("error");
+                errorNotice.addClass('error');
                 errorNotice.append(ucwords($(this).attr("id")) + radioerror);
                 errorNotice.fadeIn(750);
             } else {
@@ -192,6 +206,7 @@ $(document).ready(function()
         if (errorNotice.text() != '') {
             errorNotice.fadeOut(0);
             errorNotice.text('');
+            errorNotice.removeClass('success').addClass('error');
             errorNotice.append(formerror);
             errorNotice.fadeIn(750);
             return false;
@@ -201,6 +216,7 @@ $(document).ready(function()
             if ($(this).val() == '') {
                 errorNotice.fadeOut(0);
                 errorNotice.text('');
+                errorNotice.removeClass('success').addClass('error');
                 errorNotice.append(formerror);
                 errorNotice.fadeIn(750);
                 return false;
@@ -209,12 +225,13 @@ $(document).ready(function()
 
         $.ajax({
             type: 'POST',
-            url: '/lib/mailer.php',
+            url: document.URL + 'lib/mailer.php',
             data: $("#contact").serialize(),
             success: function(data)
             {
                 errorNotice.fadeOut(0);
                 errorNotice.text('');
+                errorNotice.removeClass('error').addClass('success');
                 errorNotice.append('Your message has been sent successfully.');
                 errorNotice.fadeIn(750);
                 $("#contact").trigger('reset');

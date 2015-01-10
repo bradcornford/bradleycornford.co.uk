@@ -212,6 +212,14 @@ body {
                 margin: 0 0 10px;
             }
 
+                #page .page_block #form_error.success {
+                    color: #92c140;
+                }
+
+                #page .page_block #form_error.error {
+                    color: #cb4d4d;
+                }
+
                 #page .page_block form label input,
                 #page .page_block form label select,
                 #page .page_block form label textarea {
@@ -223,7 +231,7 @@ body {
                 }
 
                 #page .page_block form label.success {
-                    background: transparent url(../img/success_icon.png) no-repeat 427px 25px scroll;
+                    background: transparent url(../img/success_icon.png) no-repeat 413px 25px scroll;
                 }
 
                 #page .page_block form label.success input,
@@ -233,7 +241,7 @@ body {
                 }
 
                 #page .page_block form label.error {
-                    background: transparent url(../img/error_icon.png) no-repeat 427px 25px scroll;
+                    background: transparent url(../img/error_icon.png) no-repeat 413px 25px scroll;
                 }
 
                 #page .page_block form label.error input,

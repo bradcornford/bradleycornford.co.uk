@@ -196,7 +196,7 @@ input {
     font-size: 1em;
     padding: .5em .3em;
     margin: 0 0 0.75em;
-    width: 414px;
+    width: 400px;
 }
 
 input[type=file] {
@@ -209,7 +209,7 @@ input[type=file] {
 input[type=submit],
 input[type=reset] {
     height: 2em;
-    width: 200px;
+    width: 195px;
     margin: 0.8em 0 0 0;
     padding: 0 0.5em;
     cursor: pointer;
@@ -242,7 +242,7 @@ textarea {
     border-right-color: #EEEEEE;
     margin: 0;
     padding: .3em;
-    width: 414px;
+    width: 402px;
 }
 
 select {

@@ -1,23 +1,22 @@
 <?php
 
-if ($_POST['name'] == '') {
+if ($_REQUEST['name'] == '' || !filter_var($_REQUEST['name'], FILTER_SANITIZE_STRING)) {
     return false;
 }
 
-if ($_POST['email'] == '' || !filter_var($_POST['name'], FILTER_VALIDATE_EMAIL)) {
+if ($_REQUEST['email'] == '' || !filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)) {
     return false;
 }
 
-if ($_POST['message'] == '') {
+if ($_REQUEST['message'] == '' || !filter_var($_REQUEST['message'], FILTER_SANITIZE_STRING)) {
     return false;
 }
 
 $to = 'hello@bradleycornford.co.uk';
 $subject = 'Contact Form Submission';
-$content = 'Contact: ' . $_POST['name'] . '<' . $_POST['email'] . '>' . "\r\n";
-$content = 'Message: ' . $_POST['message'];
-$headers = 'From:' . $_POST['name'] . '<' . $_POST['email'] . '>';
-
+$content = 'Contact: ' . $_REQUEST['name'] . '<' . $_REQUEST['email'] . '>' . "\r\n";
+$content = 'Message: ' . $_REQUEST['message'];
+$headers = 'From:' . $_REQUEST['name'] . '<' . $_REQUEST['email'] . '>';
 $content = wordwrap($content, 70, "\r\n");
 
 if (!mail($to, $subject, $content, $headers)) {
